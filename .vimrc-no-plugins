@@ -1,0 +1,133 @@
+set encoding=utf-8
+
+set background=dark
+set cursorline
+syntax on " enable syntax highlighting
+
+set guifont=Consolas:h11:cANSI " set font to consolas
+set guicursor=i:ver50-iCursor
+set guioptions-=r " remove scrollbar
+set guioptions -=m
+set guioptions -=T
+highlight Folded guibg=Gray4
+highlight Folded guifg=Gray22
+highlight iCursor guifg=Red guibg=Black
+highlight CursorLine guibg=Gray6
+highlight Normal guifg=cyan guibg=grey0
+autocmd InsertEnter * highlight  CursorLine guifg=Black guibg=Yellow
+autocmd InsertLeave * highlight  CursorLine guifg=Cyan guibg=Gray6
+hi Visual guifg=Black guibg=White
+
+set omnifunc=syntaxcomplete#Complete
+set scrolloff=100 " auto center the screen
+set clipboard=unnamed " set copy paste from vim
+
+" focus new split windows to below and right
+set splitbelow
+set splitright
+
+" filetype indent on
+set autoindent
+
+set showmatch " show matching brackets when cursor is over them
+
+set tabstop=2
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+
+set ignorecase " set case insensitive search
+set smartcase
+set hlsearch " set highlight search results
+set incsearch " set incremental search
+
+set guitablabel=%N/\ %t\ %M
+set relativenumber
+set number
+set ruler
+set laststatus=2 " set status line
+set linespace=7 " spacing between text lines
+
+" custom statusline, changes to yellow when in insert mode
+if version >= 700
+  au InsertEnter * hi StatusLine guifg=Yellow guibg=Black
+  au InsertLeave * hi StatusLine guifg=Gray guibg=Black
+endif
+
+let mapleader= " "
+
+inoremap ddd <C-X><C-K>
+inoremap ff <C-N>
+inoremap FF <C-X><C-F>
+inoremap LL <C-X><C-l>
+inoremap gg <C-X><C-O>
+inoremap vv <Esc>
+inoremap { {}<Left>
+inoremap [ []<Left>
+inoremap ( ()<Left>
+inoremap ' ''<Left>
+inoremap " ""<Left>
+vnoremap vv <Esc>
+cnoremap vv <Esc>
+xnoremap vv <Esc>
+snoremap vv <Esc>
+onoremap vv <Esc>
+noremap M <C-U>
+noremap m <C-D>
+noremap <Leader>funcs :g/^function " view all functions in document
+noremap <Leader>format gg=G " format document
+noremap <Leader>info g<C-g> " display document info
+noremap <Leader>open <C-w>gf " open file under cursor
+noremap ! ^
+noremap 0 $
+noremap \ /
+noremap , .
+
+" surround words with quotes
+noremap <leader>q ciw''<Esc>P
+noremap <leader>Q ciw""<Esc>P
+
+" Quicker window movement
+noremap <Leader>j <C-w>j
+noremap <Leader>k <C-w>k
+noremap <Leader>h <C-w>h
+noremap <Leader>l <C-w>l
+
+" resize buffers
+noremap - <C-w>-
+noremap + <C-w>+
+
+" splits lines in normal mode using ctrl+j
+noremap <NL> i<CR><ESC>
+
+" remove trailing whitespace on save
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+set fdc=0
+set foldcolumn=0 "0 removes fold column on left side of screen
+set foldmethod=indent
+
+" abbreviatons
+ia alertt alert('');
+ia comcss /* */
+ia comhtml <!-- -->
+ia comjs /* */
+ia divv <div></div>
+ia funn function() {};
+ia foree forEach( el => {} );
+ia forr for(let i=0; i<; i++) {}
+ia dgebii document.getElementById('');
+ia iff if() {}
+ia jqq $('').on('click', function() {});
+ia logg console.log();
+ia dqss document.querySelector('');
+ia dqsaa document.querySelectorAll('');
+ia tagg <></>
+ia ull <ul><li><a href=''></a></li></ul>
+ia loremm Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
